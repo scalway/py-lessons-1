@@ -1,0 +1,24 @@
+{% extends "bootstrap/base.html" %}
+{% block scripts %}
+    {{ super() }}
+{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="col-lg-4 offset-lg-4">
+            <h2 class="mb-4">Logowanie</h2>
+            <form method="post">
+                {{ login_form.hidden_tag() }}
+                <div class="form-group">
+                    {{ login_form.username.label(class='form-label') }}
+                    {{ login_form.username(class='form-control') }}
+                </div>
+                <div class="form-group">
+                    {{ login_form.password.label(class='form-label') }}
+                    {{ login_form.password(class='form-control') }}
+                </div>
+                {{ login_form.submit(class='btn btn-sm btn-secondary float-end mt-3') }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
