@@ -51,7 +51,7 @@ def run_example(lesson_path: Path) -> bool:
 
 def main():
     """Run all lesson examples."""
-    lessons_dir = Path(__file__).parent / "lessons"
+    lessons_dir = Path(__file__).parent / "cop-lessons"
     
     if not lessons_dir.exists():
         print("Error: lessons directory not found")
