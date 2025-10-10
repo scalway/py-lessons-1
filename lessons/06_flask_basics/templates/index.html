@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Flask Basics{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Welcome to Flask Basics</h2>
+    <p>This is a simple Flask application demonstrating basic concepts.</p>
+    
+    <h3>Task List</h3>
+    {% if tasks %}
+        <ul class="task-list">
+        {% for task in tasks %}
+            <li class="task-item {% if task.done %}done{% endif %}">
+                <span class="task-text">{{ task.text }}</span>
+                <div class="task-actions">
+                    <a href="{{ url_for('toggle_task', task_id=task.id) }}" class="btn btn-small">
+                        {% if task.done %}Undo{% else %}Done{% endif %}
+                    </a>
+                    <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-small btn-danger">Delete</a>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-tasks">No tasks yet. <a href="{{ url_for('add_task') }}">Add one!</a></p>
+    {% endif %}
+    
+    <div class="actions">
+        <a href="{{ url_for('add_task') }}" class="btn btn-primary">Add New Task</a>
+    </div>
+</div>
+{% endblock %}
