@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Add Task - Flask Basics{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Add New Task</h2>
+    
+    <form method="POST" action="{{ url_for('add_task') }}" class="task-form">
+        <div class="form-group">
+            <label for="task">Task Description:</label>
+            <input type="text" id="task" name="task" required 
+                   placeholder="Enter task description..." class="form-input">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Add Task</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

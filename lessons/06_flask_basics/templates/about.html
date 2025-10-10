@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}About - Flask Basics{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>About This Application</h2>
+    
+    <div class="info-card">
+        <h3>Application Information</h3>
+        <ul class="info-list">
+            <li><strong>Name:</strong> {{ info.name }}</li>
+            <li><strong>Version:</strong> {{ info.version }}</li>
+            <li><strong>Author:</strong> {{ info.author }}</li>
+        </ul>
+    </div>
+    
+    <div class="info-card">
+        <h3>Features Demonstrated</h3>
+        <ul>
+            <li>Basic routing and URL handling</li>
+            <li>Template inheritance with Jinja2</li>
+            <li>Form handling (GET and POST)</li>
+            <li>Dynamic routes with parameters</li>
+            <li>JSON API endpoints</li>
+            <li>Static file serving</li>
+        </ul>
+    </div>
+    
+    <div class="info-card">
+        <h3>Learn More</h3>
+        <p>This is part of the Python Lessons repository. Check out the README for more information.</p>
+        <ul>
+            <li><a href="https://flask.palletsprojects.com/" target="_blank">Flask Documentation</a></li>
+            <li><a href="https://jinja.palletsprojects.com/" target="_blank">Jinja2 Documentation</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
