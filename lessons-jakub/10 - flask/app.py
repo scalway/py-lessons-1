@@ -41,23 +41,29 @@ def add():
     if form.validate_on_submit():
         students = load_students()
 
+
+
+        ids = [s['id'] for s in students]    # refaktoryzaca . cmd+ alt + v
+        max_id = max(ids, default=0) + 1
         new_student = {
-            'id': max([s['id'] for s in students], default = 0) + 1,
+            'id': max_id,
             'first_name': form.first_name.data,
-            'last_name': form.last_name.data,
             'class_name': form.class_name.data,
+            'last_name': form.last_name.data,
         }
 
         students.append(new_student)
         save_students(students)
 
         return redirect(url_for('index'))
-
-    return render_template('add_student.html',title='dodaj ucznia', form=form)
+    else:
+        return render_template('add_student.html',title='dodaj ucznia', form=form)
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    save_students([s for s in load_students() if s['id'] != id])
+    students = load_students()
+    rest_students = [s for s in students if s['id'] != id]
+    save_students(rest_students)
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
