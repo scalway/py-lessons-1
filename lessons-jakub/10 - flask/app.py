@@ -17,11 +17,11 @@ def load_students():
     if not os.path.exists(STUDENTS_FILE):
         return []
 
-    with open(STUDENTS_FILE, 'r', encoding='utf=8') as f:
+    with open(STUDENTS_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
 
-def save_students(students):
-    with open(STUDENTS_FILE, 'w', encoding='utf=8') as f:
+def save_students(students) -> None:
+    with open(STUDENTS_FILE, 'w', encoding='utf-8') as f:
         json.dump(students, f, ensure_ascii=False, indent=4)
 
 class StudentForm(FlaskForm):
