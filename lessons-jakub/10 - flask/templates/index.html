@@ -1,0 +1,44 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock%}
+
+{% block title%} {{ title }} {% endblock %}
+
+{% block content %}
+
+    <div class="container mt-4">
+        <h2 class="mb-3">lista uczniów</h2>
+
+        {% if students %}
+            <table class="table  mb-3">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">first name</th>
+                        <th scope="col">last name</th>
+                        <th scope="col">class name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <th scope="row"> {{ student.id }} </th>
+                            <td> {{ student.first_name }}</td>
+                            <td> {{ student.last_name }}</td>
+                            <td> {{ student.class_name }}</td>
+                            <td><a href="/delete/{{ student.id}}" class="btn btn-danger">Usuń</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h3 class="mb-3">brak uczniów</h3>
+        {% endif %}
+
+        <a href="{{url_for('add') }}">Dodaj ucznia</a>
+    </div>
+{% endblock %}
