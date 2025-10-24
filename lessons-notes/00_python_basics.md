@@ -105,7 +105,7 @@ else:
 
 ```python
 # Otwieranie pliku do odczytu:
-with open('plik.txt', 'r', encoding='utf-8') as f:
+with open('plik.txt', 'r') as f:
     content = f.read()
     print(content)
 ```
@@ -118,7 +118,7 @@ oraz zapobiega blokowaniu plików i wyciekom zasobów.
 
 ```python
 # Przykład równoważny bez użycia `with`.
-f = open('plik.txt', 'r', encoding='utf-8')
+f = open('plik.txt', 'r')
 try:
     content = f.read()
     print(content)
@@ -126,23 +126,27 @@ finally:
     f.close()
 ```
 
+Poniżej więcej przykładów otwierania plików:
+
 ```python
 # Otwieranie pliku do odczytu:
 with open('plik.txt', 'r', encoding='utf-8') as f:
     content = f.read()
     print(content)
+```
 
-# encoding='utf-8' jest zalecany, ale większość współczesnych systemów
-# skonfigurowana jest aby utf-8 był domyślnym systemem kodowania znaków.
-# Jeśli go pominiemy to ZAZWYCZAJ i tak będzie użyty utf-8 właśnie.
-# Niemniej zawsze jest ryzyko że twój program będzie używany w jakimś 
-# archaicznym systemie gdzie pojawi się inna domyślna wartość.
-# Aby wymusić utf-8 przy uruchomieniu:
-#
-# $ PYTHONUTF8=1 python script.py
-# lub
-# $ python -X utf8 script.py
+`encoding='utf-8'` jest zalecany, ale większość współczesnych systemów
+skonfigurowana jest aby utf-8 był domyślnym systemem kodowania znaków.
+Jeśli go pominiemy to ZAZWYCZAJ i tak będzie użyty utf-8 właśnie.
+Niemniej zawsze jest ryzyko że twój program będzie używany w jakimś 
+archaicznym systemie gdzie pojawi się inna domyślna wartość.
+Można wymusić utf-8 przed uruchomieniem programu w pythonie za pomocą:
+`$ PYTHONUTF8=1 python script.py` lub `$ python -X utf8 script.py`
 
+może to dość niepraktycznie z uwagi na to, 
+że zawsze wywołujemy pythona z IDE... nie wiem.
+
+```python
 # Odczyt po liniach:
 with open('plik.txt', 'r') as f:
     for line in f:
