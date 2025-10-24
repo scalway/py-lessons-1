@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wynik analizy</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    a.button { display: inline-block; padding: .5rem 1rem; background: #2b7cff; color: white; text-decoration: none; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Wynik analizy</h1>
+  <p>Plik z wynikiem został zapisany na dysku.</p>
+  <p><a class="button" href="{{ url_for('output_file', filename=filename) }}">Pobierz plik JSON</a></p>
+  <p><a href="{{ url_for('index') }}">Wróć</a></p>
+</body>
+</html>
+
