@@ -9,6 +9,7 @@ A simple Python desktop application for tracking work hours across different tas
 - **SQLite Database**: All timespans and tasks are saved to a local SQLite database
 - **Summary View**: See total hours for each task including children
 - **Timespans View**: View all recorded time entries with start/end times and durations
+- **Edit Timespans**: Double-click on any timespan to reassign it to a different task
 
 ## Project Structure
 
@@ -64,6 +65,18 @@ The application will create a `workhours.db` SQLite database file in the same di
 
 - **Summary Tab**: Shows all tasks with their total hours (including subtasks)
 - **All Timespans Tab**: Shows every recorded time entry with start/end times and duration
+
+### Editing Timespans
+
+If you accidentally tracked time to the wrong task, you can easily fix it:
+
+1. Go to the "All Timespans" tab
+2. **Double-click** on the timespan you want to edit
+3. A dialog will appear showing all your tasks
+4. Select the correct task from the list
+5. Click "Select" to update the timespan
+
+The timespan will be reassigned to the new task, and the summary will automatically update to reflect the change.
 
 ## Code Design
 
