@@ -14,7 +14,10 @@ To use this feature in the actual application:
 
 import sys
 import os
-sys.path.insert(0, '/home/runner/work/py-lessons-1/py-lessons-1/work-hours-tracker')
+
+# Add the current directory to the path to import local modules
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, script_dir)
 
 from database import Database
 from task_manager import TaskManager

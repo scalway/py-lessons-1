@@ -276,12 +276,15 @@ class WorkHoursApp:
         new_task_id = self.show_task_selection_dialog()
         
         if new_task_id is not None:
-            # Update the timespan with new task
-            self.db.update_timespan_task(timespan_id, new_task_id)
-            # Refresh displays
-            self.refresh_timespans()
-            self.refresh_summary()
-            messagebox.showinfo("Success", "Timespan task updated successfully!")
+            try:
+                # Update the timespan with new task
+                self.db.update_timespan_task(timespan_id, new_task_id)
+                # Refresh displays
+                self.refresh_timespans()
+                self.refresh_summary()
+                messagebox.showinfo("Success", "Timespan task updated successfully!")
+            except ValueError as e:
+                messagebox.showerror("Error", f"Failed to update timespan: {e}")
     
     def show_task_selection_dialog(self):
         """Show dialog to select a task. Returns selected task_id or None."""
