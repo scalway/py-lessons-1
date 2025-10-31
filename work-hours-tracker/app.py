@@ -311,13 +311,17 @@ class WorkHoursApp:
             self.current_task_label.config(text=f"Task: {task_path}")
     
     def update_timer_display(self):
-        """Update timer display every second."""
+        """Update timer display every second.
+        
+        This runs continuously to keep the display updated, showing either
+        the elapsed time (when running) or 00:00:00 (when stopped).
+        """
         if self.timer.is_running:
             self.timer_label.config(text=self.timer.format_elapsed_time())
         else:
             self.timer_label.config(text="00:00:00")
         
-        # Schedule next update
+        # Schedule next update (always runs to keep display current)
         self.root.after(1000, self.update_timer_display)
     
     def on_closing(self):
