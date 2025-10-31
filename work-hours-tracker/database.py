@@ -95,6 +95,35 @@ class Database:
         )
         self.connection.commit()
     
+    def update_timespan_task(self, timespan_id: int, new_task_id: int):
+        """Update the task associated with a timespan.
+        
+        Args:
+            timespan_id: ID of the timespan to update
+            new_task_id: ID of the new task to assign
+            
+        Raises:
+            ValueError: If timespan_id or new_task_id doesn't exist
+        """
+        cursor = self.connection.cursor()
+        
+        # Validate that timespan exists
+        cursor.execute("SELECT id FROM timespans WHERE id = ?", (timespan_id,))
+        if cursor.fetchone() is None:
+            raise ValueError(f"Timespan with id {timespan_id} does not exist")
+        
+        # Validate that new task exists
+        cursor.execute("SELECT id FROM tasks WHERE id = ?", (new_task_id,))
+        if cursor.fetchone() is None:
+            raise ValueError(f"Task with id {new_task_id} does not exist")
+        
+        # Perform update
+        cursor.execute(
+            "UPDATE timespans SET task_id = ? WHERE id = ?",
+            (new_task_id, timespan_id)
+        )
+        self.connection.commit()
+    
     def get_timespans_for_task(self, task_id: int) -> List[sqlite3.Row]:
         """Get all timespans for a specific task."""
         cursor = self.connection.cursor()
