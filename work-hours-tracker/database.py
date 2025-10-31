@@ -95,6 +95,15 @@ class Database:
         )
         self.connection.commit()
     
+    def update_timespan_task(self, timespan_id: int, new_task_id: int):
+        """Update the task associated with a timespan."""
+        cursor = self.connection.cursor()
+        cursor.execute(
+            "UPDATE timespans SET task_id = ? WHERE id = ?",
+            (new_task_id, timespan_id)
+        )
+        self.connection.commit()
+    
     def get_timespans_for_task(self, task_id: int) -> List[sqlite3.Row]:
         """Get all timespans for a specific task."""
         cursor = self.connection.cursor()
