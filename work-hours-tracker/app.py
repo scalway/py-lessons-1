@@ -186,6 +186,9 @@ class WorkHoursApp:
         
         self.timespans_tree.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
+        # Bind double-click event for editing
+        self.timespans_tree.bind('<Double-Button-1>', self.on_timespan_double_click)
+        
         # Scrollbar
         timespans_scroll = ttk.Scrollbar(parent, orient=tk.VERTICAL, command=self.timespans_tree.yview)
         timespans_scroll.grid(row=0, column=1, sticky=(tk.N, tk.S))
@@ -251,6 +254,7 @@ class WorkHoursApp:
             
             self.timespans_tree.insert(
                 '', 'end',
+                iid=str(ts['id']),
                 values=(task_name, start_time, end_time, duration)
             )
     
@@ -259,6 +263,82 @@ class WorkHoursApp:
         selection = self.tasks_tree.selection()
         if selection:
             self.selected_task_id = int(selection[0])
+    
+    def on_timespan_double_click(self, event):
+        """Handle double-click on timespan to edit task."""
+        selection = self.timespans_tree.selection()
+        if not selection:
+            return
+        
+        timespan_id = int(selection[0])
+        
+        # Create a simple dialog to select new task
+        new_task_id = self.show_task_selection_dialog()
+        
+        if new_task_id is not None:
+            try:
+                # Update the timespan with new task
+                self.db.update_timespan_task(timespan_id, new_task_id)
+                # Refresh displays
+                self.refresh_timespans()
+                self.refresh_summary()
+                messagebox.showinfo("Success", "Timespan task updated successfully!")
+            except ValueError as e:
+                messagebox.showerror("Error", f"Failed to update timespan: {e}")
+    
+    def show_task_selection_dialog(self):
+        """Show dialog to select a task. Returns selected task_id or None."""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("Select Task")
+        dialog.geometry("400x500")
+        dialog.transient(self.root)
+        dialog.grab_set()
+        
+        selected_task_id = [None]  # Use list to store result from nested function
+        
+        # Create frame for tree
+        frame = ttk.Frame(dialog, padding="10")
+        frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Label
+        ttk.Label(frame, text="Select a task:", font=("Arial", 12)).pack(pady=(0, 10))
+        
+        # Task tree
+        tree = ttk.Treeview(frame, selectmode='browse')
+        tree.pack(fill=tk.BOTH, expand=True)
+        
+        # Scrollbar
+        scrollbar = ttk.Scrollbar(frame, orient=tk.VERTICAL, command=tree.yview)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        tree.configure(yscrollcommand=scrollbar.set)
+        
+        # Populate tree with tasks
+        task_tree = self.task_manager.get_task_tree()
+        for task_id, indented_name, level in task_tree:
+            tree.insert('', 'end', iid=str(task_id), text=indented_name)
+        
+        # Button frame
+        button_frame = ttk.Frame(dialog, padding="10")
+        button_frame.pack(fill=tk.X)
+        
+        def on_select():
+            selection = tree.selection()
+            if selection:
+                selected_task_id[0] = int(selection[0])
+                dialog.destroy()
+            else:
+                messagebox.showwarning("No Selection", "Please select a task.")
+        
+        def on_cancel():
+            dialog.destroy()
+        
+        ttk.Button(button_frame, text="Select", command=on_select).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="Cancel", command=on_cancel).pack(side=tk.LEFT, padx=5)
+        
+        # Wait for dialog to close
+        self.root.wait_window(dialog)
+        
+        return selected_task_id[0]
     
     def add_root_task(self):
         """Add a new root task."""

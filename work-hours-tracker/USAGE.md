@@ -50,6 +50,18 @@ The time is automatically saved to the database!
 - **Summary Tab**: Shows total hours for each task (including sub-tasks)
 - **All Timespans Tab**: Shows every time entry you've recorded
 
+### 6. Edit Timespans (Fix Mistakes)
+
+Made a mistake and tracked time to the wrong task? No problem!
+
+1. Go to the **All Timespans** tab
+2. **Double-click** on the timespan you want to change
+3. A dialog will appear with all your tasks
+4. Select the correct task
+5. Click "Select"
+
+Done! The timespan is now assigned to the correct task.
+
 ## Running the Demo
 
 To see a demonstration without the GUI:
@@ -71,6 +83,8 @@ This will:
 - **Timer**: The timer automatically saves when you stop it
 - **Summary**: Parent tasks show total time including all children
 - **Database**: Everything is saved to `workhours.db` automatically
+- **Edit Mistakes**: Double-click any timespan in the "All Timespans" tab to change its task
+- **Demo Edit Feature**: Run `python3 demo_edit.py` to see the editing feature in action
 
 ## Troubleshooting
 
