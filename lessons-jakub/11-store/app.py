@@ -2,12 +2,12 @@ import os
 import secrets
 from flask import Flask
 from flask_bs4 import Bootstrap
-from sqlalchemy.testing.pickleable import User
 
 from extensions import db, login_manager, bcrypt
 from models import Users
 from main.routes import main_bp
 from auth.routes import auth_bp
+from store.routes import store_bp
 
 def create_app():
     app = Flask(__name__)
@@ -20,6 +20,10 @@ def create_app():
     DATA_DIR = os.path.join(BASE_DIR, 'data')
     os.makedirs(DATA_DIR, exist_ok=True)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(DATA_DIR, 'users.db')
+    app.config['SQLALCHEMY_BINDS'] = {
+        'inventory': 'sqlite:///' + os.path.join(DATA_DIR, 'inventory.db')
+    }
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # inicjalizacja rozszerzeń
     db.init_app(app)
@@ -28,6 +32,7 @@ def create_app():
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(store_bp, url_prefix='/store')
 
     # rejestracja loadera użytkownika
     @login_manager.user_loader
