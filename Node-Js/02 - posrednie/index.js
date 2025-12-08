@@ -3,11 +3,11 @@ const app = express()
 const port = 3002
 const path = require('node:path')
 
-app.use(express.static('publick'))
+app.use(express.static('strony'))
 app.use(express.static('files'))
-//npm instal
-//npm init
-//node .
+//npm instal - to pobiera nam node moguels - JEST TO POTRZEBNE
+//
+//link do otwarcia http://localhost:3002/
 
 app.get('/', (req, res) => {
   res.sendFile('index.html', {root: `${__dirname}/strony`})
