@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swiftKrisLessons}",
+            "name": "Debug w02",
+            "target": "w02",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug w02"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swiftKrisLessons}",
+            "name": "Release w02",
+            "target": "w02",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release w02"
+        }
+    ]
+}
