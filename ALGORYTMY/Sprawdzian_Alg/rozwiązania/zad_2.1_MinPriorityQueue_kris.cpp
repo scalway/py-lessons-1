@@ -76,7 +76,7 @@ public:
         heap[0] = heap.back();
         heap.pop_back();
         
-        if (!heap.empty()) {
+        if (!isEmpty()) {
             heapifyDown(0);
         }
         return minVal;
