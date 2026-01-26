@@ -1,0 +1,46 @@
+Sprawdzian ReactNative (p5) - punktacja
+
+/*---------------------------------------------------------------------------------
+
+Proszę o zalogowanie na konto matura z hasłem matura
+Po sprawdzianie proszę o usunięcie swoich plików
+
+Proszę o wyłączenie aktualizacji aplikacji ExpoGo w sklepie play na telefonie
+
+/*---------------------------------------------------------------------------------
+
+Opis
+
+a) można korzystać z dowolnej oficjalnej dokumentacji
+b) nie otwieramy żadnych innych swoich ćwiczeń
+c) używamy własnej inteligencji a nie sztucznej...
+d) piszemy na moich komputerach
+e) przed końcem lekcji podam miejsce do skopiowania spakowanego folderu
+
+
+
+1. Komponenty
+
+Wymagane komponenty to:
+
+a) ekrany aplikacji 
+
+TaskScreen
+SettingsScreen
+
+b) komponent
+
+TaskItem
+
+
+2. Punktacja 10 pkt
+
+a) Serwer uruchamia się, poprawnie zwraca listę dwu zadań (GET), widoczne w przegladarce - [1 pkt]
+b) Aplikacja mobilna  - możliwość przejścia między ekranem głównym, a ustawieniami (oraz powrót) bez błędów - [1 pkt]
+c) Aplikacja mobilna - poprawnie wyświetla dane z serwera przy starcie w dowolny sposób - [1 pkt]
+d) Aplikacja mobilna - poprawnie odświeża listę danych po dodaniu zadania - [1 pkt] 
+e) Aplikacja mobilna - poprawne zapisanie, odczyt i usunięcie klucza z pamięci trwałej telefonu  - [1 pkt] 
+f) Aplikacja mobilna  - czytelne wyświetlenie listy danych z wykorzystaniem FlatList i własnego komponentu TaskItem  - [1 pkt] 
+g) Wykorzystanie klucza do blokady/autoryzacji dodawania zadań (odczyt z pamięci) - [2 pkt]
+h) Wyświetlanie detali zadania po kliknięciu w element listy - [1 pkt]
+i) W detalach jest zapisany i widoczny klucz - [1 pkt]
